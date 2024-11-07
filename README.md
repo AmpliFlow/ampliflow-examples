@@ -1,6 +1,6 @@
 # AmpliFlow Examples
 
-This repository provides developer examples demonstrating how to integrate with [AmpliFlow](https://www.ampliflow.se) using various APIs and solutions. The examples are written in Python and cover common use cases such as interacting with the Custom List API and updating KPI measurements.
+This repository provides developer examples demonstrating how to integrate with [AmpliFlow](https://www.ampliflow.se) using [APIs (Swagger definition here)](https://app.ampliflow.com/swagger/index.html) and solutions. The examples are written in Python and cover common use cases such as interacting with the Custom List API and updating KPI measurements.
 
 It includes an example of a simple data integration script that integrates with [Wint](https://www.wint.se/) to show an example of how to get financial data into KPI measurements in AmpliFlow.
 
