@@ -75,7 +75,7 @@ Before you begin, ensure you have the following installed:
 
 ## Usage
 
-The repository includes example scripts demonstrating how to use different AmpliFlow APIs.
+The repository includes example scripts demonstrating how to use different AmpliFlow APIs. Each property in the exec endpoints is accompanied by a detailed description in the Swagger documentation to assist with implementation.
 
 ### Custom List API Example
 
