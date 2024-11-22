@@ -1,9 +1,7 @@
-
 import json
 import requests
 from datetime import datetime
 import collections
-
 import os
 from dotenv import load_dotenv
 
@@ -26,16 +24,16 @@ def get_subscriber_counts_by_month(group_id):
         'page': 1
     }
     subscribers = []
-    
+
     while True:
         response = requests.get(url, headers=headers, params=params)
         data = response.json()
-        
+
         if not data:
             break
-        
+
         subscribers.extend(data)
-        
+
         if len(data) < params['limit']:
             break
         else:
@@ -43,7 +41,7 @@ def get_subscriber_counts_by_month(group_id):
 
     # Count subscribers by month
     counts_by_month = collections.Counter()
-    
+
     for subscriber in subscribers:
         date_subscribed = subscriber['date_subscribe']
         # Convert to datetime object
@@ -54,14 +52,27 @@ def get_subscriber_counts_by_month(group_id):
 
     return counts_by_month
 
+def transform_counts_to_values(counts_by_month):
+    transformed_values = []
+    for month_str, count in counts_by_month.items():
+        # Split the 'YYYY-MM' string into year and month integers
+        year, month = map(int, month_str.split('-'))
+        transformed_values.append({
+            'year': year,
+            'month': month,
+            'value': count
+        })
+    return transformed_values
+
 group_id = 107336803539748582
 
 counts_by_month = get_subscriber_counts_by_month(group_id)
 
-print("Subscriber counts by month:")
-counts_as_json = json.dumps(counts_by_month)
-print(counts_as_json)
-# Print the counts sorted by month
-for month in sorted(counts_by_month.keys()):
-    print(f"{month}: {counts_by_month[month]} subscribers")
+# Transform the counts into the desired format
+transformed_values = transform_counts_to_values(counts_by_month)
 
+# Convert to JSON
+json_output = json.dumps(transformed_values, indent=4)
+
+print("Subscriber counts transformed to desired JSON format:")
+print(json_output)
