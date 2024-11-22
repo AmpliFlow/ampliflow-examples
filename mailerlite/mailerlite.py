@@ -15,6 +15,7 @@ mailerlite_group_id = os.environ.get("MAILERLITE_GROUP_ID")
 af_base_url = os.environ.get("AF_BASE_URL")
 af_api_key = os.environ.get("AF_API_KEY")
 
+kpi_name = 'ISO e-book downloads'
 
 if not all([mailerlite_api_key, af_base_url, af_api_key]):
     print("Missing required environment variables. Please ensure MAILERLITE_API_KEY, AF_BASE_URL, and AF_API_KEY are set.")
@@ -145,7 +146,6 @@ def main():
     kpis = get_kpis()
 
     # Step 3: Find the KPI by name (Replace with your actual KPI name)
-    kpi_name = 'Subscribers'
     kpi = find_kpi_by_name(kpis, kpi_name)
     if not kpi:
         logging.error(f'KPI "{kpi_name}" not found.')
