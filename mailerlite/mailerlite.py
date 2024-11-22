@@ -15,7 +15,7 @@ mailerlite_group_id = os.environ.get("MAILERLITE_GROUP_ID")
 af_base_url = os.environ.get("AF_BASE_URL")
 af_api_key = os.environ.get("AF_API_KEY")
 
-kpi_name = 'ISO e-book downloads'
+kpi_name = 'Subscribers'
 
 if not all([mailerlite_api_key, af_base_url, af_api_key]):
     print("Missing required environment variables. Please ensure MAILERLITE_API_KEY, AF_BASE_URL, and AF_API_KEY are set.")
