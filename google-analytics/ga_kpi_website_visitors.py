@@ -25,6 +25,7 @@ load_dotenv()
 # Retrieve Ampliflow credentials
 base_url = os.environ.get("AF_BASE_URL")
 api_key = os.environ.get("AF_API_KEY")
+api_headers = {"X-API-Key": api_key} if api_key else {}
 
 # Retrieve environment variables for Google Analytics
 property_id = os.getenv('GA4_PROPERTY_ID')
@@ -38,8 +39,8 @@ print("Property ID:", property_id)
 print("Service Account Path:", service_account_path)
 
 def get_kpis():
-    url = f'{base_url}/api/Exec/kpis/{api_key}'
-    response = requests.get(url)
+    url = f'{base_url}/api/Exec/kpis'
+    response = requests.get(url, headers=api_headers)
     if response.status_code == 200:
         logging.info('KPIs fetched successfully.')
         kpis = response.json()
@@ -57,8 +58,8 @@ def find_kpi_by_name(kpis, name):
     return None
 
 def get_manual_data_sources(kpi_id):
-    url = f'{base_url}/api/Exec/kpi/manual-data-sources/{kpi_id}/{api_key}'
-    response = requests.get(url)
+    url = f'{base_url}/api/Exec/kpi/manual-data-sources/{kpi_id}'
+    response = requests.get(url, headers=api_headers)
     if response.status_code == 200:
         logging.info(f'Manual data sources for KPI {kpi_id} fetched successfully.')
         data_sources = response.json()
@@ -69,8 +70,8 @@ def get_manual_data_sources(kpi_id):
         sys.exit(1)
 
 def update_manual_data_source(data_source_id, values_payload):
-    url = f'{base_url}/api/Exec/kpi/manual-data-sources/{api_key}'
-    headers = {'Content-Type': 'application/json'}
+    url = f'{base_url}/api/Exec/kpi/manual-data-sources'
+    headers = {'Content-Type': 'application/json', **api_headers}
     payload = {
         'id': data_source_id,
         'values': values_payload
