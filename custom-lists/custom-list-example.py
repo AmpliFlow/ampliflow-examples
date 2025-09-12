@@ -7,12 +7,13 @@ from dotenv import load_dotenv
 load_dotenv()
 base_url = os.environ.get("AF_BASE_URL")
 api_key = os.environ.get("AF_API_KEY")
+api_headers = {"X-API-Key": api_key} if api_key else {}
 
 print(f'Base URL: {base_url}')
 
 def get_custom_lists():
-    url = f'{base_url}/api/Exec/custom-lists/{api_key}'
-    response = requests.get(url)
+    url = f'{base_url}/api/Exec/custom-lists'
+    response = requests.get(url, headers=api_headers)
     if response.status_code == 200:
         print('Custom lists fetched successfully.')
 
@@ -34,8 +35,8 @@ def find_custom_list_by_name(custom_lists, name):
 
 
 def create_custom_list_item(custom_list_id, properties_payload):
-    url = f'{base_url}/api/Exec/custom-list-items/{api_key}'
-    headers = {'Content-Type': 'application/json'}
+    url = f'{base_url}/api/Exec/custom-list-items'
+    headers = {'Content-Type': 'application/json', **api_headers}
     payload = {
         'customListId': custom_list_id,
         'properties': properties_payload
@@ -55,8 +56,8 @@ def create_custom_list_item(custom_list_id, properties_payload):
 
 
 def update_custom_list_item(item_id, custom_list_id, properties_payload):
-    url = f'{base_url}/api/Exec/custom-list-items/{api_key}'
-    headers = {'Content-Type': 'application/json'}
+    url = f'{base_url}/api/Exec/custom-list-items'
+    headers = {'Content-Type': 'application/json', **api_headers}
     payload = {
         'id': item_id,
         'customListId': custom_list_id,

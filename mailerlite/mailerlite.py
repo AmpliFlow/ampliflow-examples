@@ -14,6 +14,7 @@ mailerlite_group_id = os.environ.get("MAILERLITE_GROUP_ID")
 
 af_base_url = os.environ.get("AF_BASE_URL")
 af_api_key = os.environ.get("AF_API_KEY")
+api_headers = {"X-API-Key": af_api_key} if af_api_key else {}
 
 kpi_name = 'Subscribers'
 
@@ -88,8 +89,8 @@ def transform_counts_to_values(counts_by_month):
     return transformed_values
 
 def get_kpis():
-    url = f'{af_base_url}/api/Exec/kpis/{af_api_key}'
-    response = requests.get(url)
+    url = f'{af_base_url}/api/Exec/kpis'
+    response = requests.get(url, headers=api_headers)
     if response.status_code == 200:
         logging.info('KPIs fetched successfully.')
         kpis = response.json()
@@ -108,8 +109,8 @@ def find_kpi_by_name(kpis, name):
     return None
 
 def get_manual_data_sources(kpi_id):
-    url = f'{af_base_url}/api/Exec/kpi/manual-data-sources/{kpi_id}/{af_api_key}'
-    response = requests.get(url)
+    url = f'{af_base_url}/api/Exec/kpi/manual-data-sources/{kpi_id}'
+    response = requests.get(url, headers=api_headers)
     if response.status_code == 200:
         logging.info(f'Manual data sources for KPI {kpi_id} fetched successfully.')
         data_sources = response.json()
@@ -120,8 +121,8 @@ def get_manual_data_sources(kpi_id):
         sys.exit(1)
 
 def update_manual_data_source(data_source_id, values_payload):
-    url = f'{af_base_url}/api/Exec/kpi/manual-data-sources/{af_api_key}'
-    headers = {'Content-Type': 'application/json'}
+    url = f'{af_base_url}/api/Exec/kpi/manual-data-sources'
+    headers = {'Content-Type': 'application/json', **api_headers}
     payload = {
         'id': data_source_id,
         'values': values_payload
