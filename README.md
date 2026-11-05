@@ -134,7 +134,7 @@ This example pulls newsletter subscriber counts per month from MailerLite into a
 
 ### Control Set Export Example
 
-This example logs in with your tenant, username and password and exports every live (non-archived/deleted) control set as machine-readable, LLM-friendly YAML - every API field of every control, with display values inlined for id fields - plus reference-data for the dropdown sources (users, teams, roles, processes, risks, pages, legislation, equipment). Exports are local only (`output/` is gitignored and may contain licensed standard texts): never commit or publish them. See `control-set-export/README.md`.
+This example logs in with your tenant, username and password and exports every live (non-archived/deleted) control set as machine-readable, LLM-friendly YAML — every API field of every control, with display values inlined for id fields — plus reference-data for the dropdown sources (users, teams, roles, processes, risks, pages, legislation, equipment). Exports are written to a gitignored `output/` folder. See `control-set-export/README.md`.
 
 - **Script**: `control-set-export/control_set_export.py` (requires `AF_TENANT`, `AF_USERNAME` and `AF_PASSWORD` in `control-set-export/.env`)
 

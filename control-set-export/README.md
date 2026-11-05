@@ -16,10 +16,6 @@ and equipment (fetched from the control-item options endpoints). Linked
 processes, risks, pages, legislation and equipment already carry their names
 inside each item; evidence files carry their file names.
 
-Output is written to `output/`, which is gitignored. Exports may contain
-licensed standard texts (e.g. ISO via [SIS](https://www.sis.se)) - keep them
-inside your tenant and local files; never commit or publish them.
-
 ## Configuration
 
 Copy `.env.example` to `.env` and fill in your tenant domain, username and
