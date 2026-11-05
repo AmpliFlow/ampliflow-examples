@@ -12,7 +12,10 @@ It includes an example of a simple data integration script that integrates with 
   - [Configuration](#configuration)
 - [Usage](#usage)
   - [Custom List API Example](#custom-list-api-example)
-  - [Update KPI Measurement API Example](#update-kpi-measurement-api-example)
+  - [Update KPI Measurement API Example (Wint)](#update-kpi-measurement-api-example-wint)
+  - [Google Analytics Example](#google-analytics-example)
+  - [MailerLite Example](#mailerlite-example)
+  - [Control Set Export Example](#control-set-export-example)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -81,12 +84,12 @@ The repository includes example scripts demonstrating how to use different Ampli
 
 The custom list API example shows how to interact with custom lists in AmpliFlow.
 
-- **Script**: `custom_list_example.py`
+- **Script**: `custom-lists/custom-list-example.py`
 
 **Running the Example**
 
 ```bash
-python custom_list_example.py
+python custom-lists/custom-list-example.py
 ```
 
 **Features Demonstrated**
@@ -97,16 +100,16 @@ python custom_list_example.py
 - Updating existing items in a custom list
 - Error handling for API requests
 
-### Update KPI Measurement API Example
+### Update KPI Measurement API Example (Wint)
 
-This example demonstrates how to update KPI measurements using the AmpliFlow API.
+This example demonstrates how to update KPI measurements using the AmpliFlow API, pulling monthly revenue data from [Wint](https://www.wint.se/).
 
-- **Script**: `update_kpi_measurement.py`
+- **Script**: `kpi-wint-integration/kpi_measurement_update.py` (fetches data via `kpi-wint-integration/wint_get_invoiced.py`)
 
 **Running the Example**
 
 ```bash
-python update_kpi_measurement.py
+python kpi-wint-integration/kpi_measurement_update.py
 ```
 
 **Features Demonstrated**
@@ -115,6 +118,25 @@ python update_kpi_measurement.py
 - Submitting new KPI measurements
 - Validating API responses
 - Handling errors and exceptions
+
+### Google Analytics Example
+
+This example pulls website data from Google Analytics 4 into KPI manual data sources in AmpliFlow. See `google-analytics/README.md` for setup instructions (GA4 service account and property id required).
+
+- **Script**: `google-analytics/ga_kpi_website_visitors.py` (active users)
+- **Script**: `google-analytics/ga_kpi_update.py` (conversion events)
+
+### MailerLite Example
+
+This example pulls newsletter subscriber counts per month from MailerLite into a KPI manual data source in AmpliFlow.
+
+- **Script**: `mailerlite/mailerlite.py` (requires `MAILERLITE_API_KEY` and `MAILERLITE_GROUP_ID` in `.env`)
+
+### Control Set Export Example
+
+This example logs in with your tenant, username and password and exports every live (non-archived/deleted) control set as machine-readable, LLM-friendly YAML - every API field of every control, with display values inlined for id fields - plus reference-data for the dropdown sources (users, teams, roles, processes, risks, pages, legislation, equipment). Exports are local only (`output/` is gitignored and may contain licensed standard texts): never commit or publish them. See `control-set-export/README.md`.
+
+- **Script**: `control-set-export/control_set_export.py` (requires `AF_TENANT`, `AF_USERNAME` and `AF_PASSWORD` in `control-set-export/.env`)
 
 ## Contributing
 

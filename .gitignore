@@ -164,3 +164,5 @@ cython_debug/
 .env
 
 google-analytics/credentials/*.json
+# Control set exports may contain licensed standard texts - never publish
+control-set-export/output/
